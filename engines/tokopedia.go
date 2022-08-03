@@ -80,6 +80,7 @@ func (e *Engine) DoSearchQuery(keyword string) {
 
 		product := postgres.Product{
 			ID:            uuid.New(),
+			ExtID:         fmt.Sprint(item.ID),
 			Name:          item.Name,
 			Price:         price,
 			ImageUrl:      item.ImageUrl,

@@ -7,5 +7,7 @@ CREATE TABLE public.products (
     rating double precision DEFAULT 0,
     rating_average double precision DEFAULT 0,
     url text,
-    url_img text
+    url_img text,
+    ext_id varchar(255) NOT NULL
+    UNIQUE(ext_id)
 );

@@ -8,6 +8,7 @@ import (
 
 type Product struct {
 	ID            uuid.UUID
+	ExtID         string
 	CreatedAt     time.Time
 	Name          string
 	Price         string
@@ -29,10 +30,11 @@ func (db *Postgres) InsertItemToProduct(item Product) error {
 			rating, 
 			rating_average, 
 			url, 
-			url_img
+			url_img,
+			ext_id
 		) VALUES (
-			$1,	$2, $3,	$4,	$5, $6, $7, $8,	$9
-		)`,
+			$1,	$2, $3,	$4,	$5, $6, $7, $8,	$9, $10
+		) ON CONFLICT DO NOTHING`,
 		item.ID,
 		item.CreatedAt,
 		item.Name,
@@ -42,6 +44,7 @@ func (db *Postgres) InsertItemToProduct(item Product) error {
 		item.RatingAverage,
 		item.Url,
 		item.ImageUrl,
+		item.ExtID,
 	)
 	if err != nil {
 		return err
